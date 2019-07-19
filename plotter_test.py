@@ -10,23 +10,27 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 from scipy.interpolate import griddata
 
-def save_csv (file, columns):
+def save_csv (file):
     # saves selected columns of file into a new csv.
     # file is a string, and columns is a list of integers.
     # returns saved dataframe and new filename
     df = pd.read_csv(file, header=None) #fills dataframe with info from csv file
+    print("loaded dataframe")
     X = df.iloc[:,0]
     Y = df.iloc[:,1]
     Z = df.iloc[:,2]
+    print("loaded xyz")
 
     x1 = np.linspace(X.min(), X.max(), len(X.unique()))
     y1 = np.linspace(Y.min(), Y.max(), len(Y.unique()))
     x2, y2 = np.meshgrid(x1, y1)
     z2 = griddata((X, Y), Z, (x2, y2), method='linear')
+    print("remapped xyz")
 
     plotter = plt.figure().gca(projection='3d')
     plotter.plot_surface(x2, y2, z2)
     plt.show()
+    print(plotted)
 
     return column_restricted_df, file # returns saved dataframe and new filename
 
