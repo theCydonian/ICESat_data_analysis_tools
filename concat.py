@@ -8,6 +8,7 @@ import glob
 
 def main():
     file_list = glob.glob(sys.argv[1]) # saves list of filenames from regex
+    print(file_list)
     df_list = [] # initializes empty list of dataframes
     for file in file_list:
         df_list.append(pd.read_csv(file)) # adds each csv to the datframe list

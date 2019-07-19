@@ -9,11 +9,12 @@ def save_csv (file, columns):
     # saves selected columns of file into a new csv.
     # file is a string, and columns is a list of integers.
     # returns saved dataframe and new filename
-    df = pd.read_csv(file) #fills dataframe with info from csv file
+    
     if os.path.getsize(file) == 0: # checks if file is empty
         print ("File is empty. Skipping file")
-        return df, os.path.splitext(file)[0] + "_column_restricted.csv" # returns default dataframe and default filename
-    
+        return pd.DataFrame(), os.path.splitext(file)[0] + "_column_restricted.csv" # returns default dataframe and default filename
+
+    df = pd.read_csv(file) #fills dataframe with info from csv file
     column_restricted_df = df.iloc[:,columns] #selects columns
 
     new_name = os.path.splitext(file)[0] + "_column_restricted.csv" #modifies original filename
