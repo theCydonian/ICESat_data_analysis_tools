@@ -14,7 +14,7 @@ def save_csv (file, columns):
     # saves selected columns of file into a new csv.
     # file is a string, and columns is a list of integers.
     # returns saved dataframe and new filename
-    df = pd.read_csv(file) #fills dataframe with info from csv file
+    df = pd.read_csv(file, header=None) #fills dataframe with info from csv file
     X = df.iloc[:,0]
     Y = df.iloc[:,1]
     Z = df.iloc[:,2]
@@ -27,7 +27,7 @@ def save_csv (file, columns):
     plotter = plt.figure().gca(projection='3d')
     plotter.plot_surface(x2, y2, z2)
     plt.show()
-    
+
     return column_restricted_df, file # returns saved dataframe and new filename
 
 
