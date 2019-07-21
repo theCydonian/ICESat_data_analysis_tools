@@ -21,18 +21,14 @@ def save_csv (file):
     Z = df.iloc[:,2]
     print("loaded xyz")
 
-    x1 = np.linspace(X.min(), X.max(), len(X.unique()))
-    y1 = np.linspace(Y.min(), Y.max(), len(Y.unique()))
-    x2, y2 = np.meshgrid(x1, y1)
-    z2 = griddata((X, Y), Z, (x2, y2), method='linear')
-    print("remapped xyz")
+    fig = plt.figure()
+    ax = fig.gca(projection='3d')
 
-    plotter = plt.figure().gca(projection='3d')
-    plotter.plot_surface(x2, y2, z2)
+    ax.plot_trisurf(X, Y, Z, linewidth=0.2, antialiased=True)
+
     plt.show()
-    print(plotted)
 
-    return column_restricted_df, file # returns saved dataframe and new filename
+    return df, file # returns saved dataframe and new filename
 
 
 def main():
