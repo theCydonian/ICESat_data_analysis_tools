@@ -24,43 +24,43 @@ def main():
 		except:
 			continue
 		df_list.append(csv) # adds each csv to the datframe list
-        # Sort by time
+        	# Sort by time
 		lat = csv.iloc[:,12]
-        alt = csv.iloc[:,14]
-        sol = csv.iloc[:,23]
-        a_d = csv.iloc[:,6]
-        coel = csv.iloc[:,144]
-        campaign = str( csv.iloc[1,4] )
-        campaignAlts.update(  { campaign : statistics.mean(alt) } )
+        	alt = csv.iloc[:,14]
+        	sol = csv.iloc[:,23]
+        	a_d = csv.iloc[:,6]
+        	coel = csv.iloc[:,144]
+        	campaign = str( csv.iloc[1,4] )
+        	campaignAlts.update(  { campaign : statistics.mean(alt) } )
 
-        #Solar Angle Compairson Graphs
-        plt.scatter(lat,alt,c=sol)
-        cbar= plt.colorbar()
-        cbar.set_label("solar angle")
-        plt.savefig('Graphs/Jakobs_' + campaign + 'solAngle.png')
-        plt.close()
+		#Solar Angle Compairson Graphs
+		plt.scatter(lat,alt,c=sol)
+		cbar= plt.colorbar()
+		cbar.set_label("solar angle")
+		plt.savefig('Graphs/Jakobs_' + campaign + 'solAngle.png')
+		plt.close()
 
-        #Coelevation Comparison Graphs
-        plt.scatter(lat,alt,c=coel)
-        cbar= plt.colorbar()
-        cbar.set_label("coelevation angle")
-        plt.savefig('Graphs/Jakobs_' + campaign + 'coelevation.png')
-        plt.close()
+		#Coelevation Comparison Graphs
+		plt.scatter(lat,alt,c=coel)
+		cbar= plt.colorbar()
+		cbar.set_label("coelevation angle")
+		plt.savefig('Graphs/Jakobs_' + campaign + 'coelevation.png')
+		plt.close()
 
-        """#Ascending/Descending Comparisons
-        mapping = {'A': 'x', 'D': 'o'}
-        for i in range(len(lat)):
-            plt.scatter(lat[i], alt[i], marker=mapping[a_d[i]])
-        plt.savefig('Graphs/Jakobs_' + campaign + 'asc_desc.png')
-        plt.close()
-        """
+		"""#Ascending/Descending Comparisons
+		mapping = {'A': 'x', 'D': 'o'}
+		for i in range(len(lat)):
+		    plt.scatter(lat[i], alt[i], marker=mapping[a_d[i]])
+		plt.savefig('Graphs/Jakobs_' + campaign + 'asc_desc.png')
+		plt.close()
+		"""
 
-        #Scatterplots between solarAngle and altitude
-        plt.scatter(lat,sol)
-        plt.xlabel('latitude')
-        plt.ylabel('solar angle')
-        plt.savefig('Graphs/Jakobs_' + campaign + 'solScatter.png')
-        plt.close()
+		#Scatterplots between solarAngle and altitude
+		plt.scatter(lat,sol)
+		plt.xlabel('latitude')
+		plt.ylabel('solar angle')
+		plt.savefig('Graphs/Jakobs_' + campaign + 'solScatter.png')
+		plt.close()
 
 
 
