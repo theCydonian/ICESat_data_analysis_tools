@@ -11,7 +11,8 @@ from scipy.interpolate import griddata
 import statistics
 
 
-# Generates a heck-ton of graphs
+# In order to use, you must have a local folder with all the csv data
+# The command line should read 'python graphing.py <nameOfFolder>/<regexForFileNames>'
 def main():
 	file_list = list( glob.glob( sys.argv[1]  ) ) #file_list = list( glob.glob('Jakobshavn/jak_gla06_L[0-9][a-z]_[0-9]*_ascii.txt')) # saves list of filenames from regex
 	df_list = []
