@@ -80,10 +80,10 @@ def main():
     i = 1 #variable for saving current position in list
     for file in file_list: # iterates over all selected files
         output = None # initializes output
-        if argument.timeMinimum and argument.timeMinimum: # checks if time arguments are not specified
+        if argument.timeMax and argument.timeMin: # checks if time arguments are not specified
             output = graph_csv(file, COLORi, Xi, Yi, Zi,
-             time_column=TIMEi, time_min=float(argument.timeMinimum),
-             time_max=float(argument.timeMaximum)) # saves plot
+             time_column=TIMEi, time_min=float(argument.timeMin),
+             time_max=float(argument.timeMax)) # saves plot
         else:
             output = graph_csv(file, COLORi, Xi, Yi, Zi) #saves plot
         print ("Plotted CSV with name: " + output[1])
