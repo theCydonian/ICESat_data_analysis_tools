@@ -4,13 +4,14 @@ import pandas as pd
 import glob
 import os
 import sys
+import matplotlib.pyplot as plt
 
 def get_data(file, column):
-    df = pd.read_csv(file)
-    return aggregate(column, data=df, mean)
+    df = pd.read_csv(file, header=None)
+    return df.groupby(column).mean()
 
 def save_plot(df, file):
-    plt.plot(df.iloc[:,column], df.iloc[:,1-column], linewidth=2.0)
+    plt.plot(range(len(df.iloc[:,0])), df.iloc[:,0], linewidth=2.0)
     plt.savefig(os.path.splitext(file)[0] + ".png")
 
 def main():

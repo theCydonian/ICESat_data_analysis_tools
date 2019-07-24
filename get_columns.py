@@ -34,6 +34,8 @@ def main():
         columns = list(map(int, sys.argv[2:input_length])) #saves list of selected columns
 
         i = 1 #variable for saving current position in list
+        print (file_list)
+        print (regex)
         for file in file_list:
             output = save_csv(file, columns) #saves new csv file and saves method output
             print ("Saved new csv file with path: " + output[1])
