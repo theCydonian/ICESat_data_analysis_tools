@@ -98,13 +98,13 @@ def xovers(sort_list, line_list, intersections):
     return xovers
 
 def xover_error(file):
-    df_total = pd.read_csv(file, header=None) #saves complete dataframe
-    df_list = [group for _, group in df_total.groupby(3)] #separates dataframe by ground track
+    df_total = pd.read_csv(file, header=None) #saves complete dataframe O(n)
+    df_list = [group for _, group in df_total.groupby(3)] #separates dataframe by ground track O(n)
     line_list = [stats.linregress(df.iloc[:,0],df.iloc[:,1])[0:2] for df in df_list] #creates a list of regression lines
     intersections = solve(line_list, [np.min(np.array(df_total.iloc[:,0])), \
      np.max(np.array(df_total.iloc[:,0])), np.max(np.array(df_total.iloc[:,1])), \
      np.min(np.array(df_total.iloc[:,1]))]) #finds potential intersections
-    sorted_list = [df.sort_values(by=df.columns[0], kind='mergesort') for df in df_list] #sorts dataframes for binary search
+    sorted_list = [df.sort_values(by=df.columns[0], kind='mergesort') for df in df_list] #sorts dataframes for binary search O(nlog(n))
     xover_list = xovers(sorted_list, line_list, intersections) #creates a list of crossovers
     error_data = get_error(xover_list) #creates a datframe of error
     new_name = os.path.splitext(file)[0] + "_crossover_error.csv" #modifies original filename
