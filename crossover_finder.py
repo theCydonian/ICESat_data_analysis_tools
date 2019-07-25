@@ -54,7 +54,7 @@ def get_error(xover_list):
      'Standard Deviation', 'Variance']) #initializes dataframe
     for point in alt:
         #appends each set of # of points, range, stdvar, and variance
-        df.append(dict(zip(df.columns,
+        df = df.append(dict(zip(df.columns,
          [len(point), (np.max(np.array(point))-np.min(np.array(point))),
           np.std(point), np.var(point)])), ignore_index=True)
     return df
@@ -75,8 +75,8 @@ def xovers(sort_list, intersections):
                 pass
             else:
                 higher = df.iloc[index,:] #sets upper bound of possible point
-            if np.absolute(np.sum(np.subtract(higher[0:2], intr))) < 20 \
-             or np.absolute(np.sum(np.subtract(lower[0:2], intr))) < 20: # checks if distance is acceptable
+            if np.absolute(np.sum(np.subtract(higher[0:2], intr))) < 100 \
+             or np.absolute(np.sum(np.subtract(lower[0:2], intr))) < 100: # checks if distance is acceptable
                 if np.absolute(np.sum(np.subtract(higher[0:2], intr))) > np.absolute(np.sum(np.subtract(lower[0:2], intr))):
                     points.append(lower) #appends lower if closer
                 else:
