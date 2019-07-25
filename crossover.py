@@ -9,15 +9,23 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 from scipy.interpolate import griddata
 import statistics
-#import geoplot
 import geopandas
 import shapely
 
+def cx(lat1, lon1, alt1, lat2, lon2, alt2, thresh):
+    # Finds distance between two points, if they are within
+    # threshold then return the distance, otherwise return -1
+    # Assumes these are different tracks
+    dist = (lat1*lat1 + lat2*lat2)**0.5
+    if ((lat1*lat1 + lat2*lat2)**0.5) < thresh:
+        return alt2-alt1
+    return 0
 
-# In order to use, you must have a local folder with all the csv data
-# The command line should read 'python graphing.py <nameOfFolder>/<regexForFileNames> <folderToPlaceIn>'
-# python test.py JakobshavnData/jak_gla06_L[0-9][a-z]_[0-9]*_ascii.txt new
-# python crossover.py PineData/pine_gla06_L[0-9][a-z]_[0-9]*_ascii.csv new
+def slope(file):
+    lat = file.iloc[:,12]
+    lon = file.iloc[:,13]
+    return (lat[1]-lat[0])/(lon[1]-lon[0])
+
 def main():
     file_list = sys.argv[1: len(sys.argv)-1] #graphs = sys.argv[len(sys.argv)-1]
     df_list = []
@@ -51,24 +59,6 @@ def main():
     plt.savefig('cxHist.png')
 
     plt.plot()
-
-
-
-
-
-# Finds distance between two points, if they are within
-# threshold then return the distance, otherwise return -1
-# Assumes these are different tracks
-def cx(lat1, lon1, alt1, lat2, lon2, alt2, thresh):
-    dist = (lat1*lat1 + lat2*lat2)**0.5
-    if ((lat1*lat1 + lat2*lat2)**0.5) < thresh:
-        return alt2-alt1
-    return 0
-
-def slope(file):
-    lat = file.iloc[:,12]
-    lon = file.iloc[:,13]
-    return (lat[1]-lat[0])/(lon[1]-lon[0])
 
 if __name__ == "__main__":
     main()
